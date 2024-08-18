@@ -15,13 +15,19 @@ public class Platform : MonoBehaviour
     //private double minScale = 0.5;
     //private double maxScale = 10;
 
+    // scale unit increment to target, per update
+    private float scaleRate = 0.4f; 
+
     // CONSTANTS --------------------------------------------------
 
     // How much to multiply scale by, for each increment. 
     // [SerializeField]
     private float scaleFactor = 2.0f;
     private PlatformType platformType;
-    
+
+
+    // STATE ------------------------------------------------------
+    private Vector3 target
 
     // Start is called before the first frame update
     void Start()
