@@ -23,8 +23,6 @@ public class Player : MonoBehaviour
     private float jumpingPower = 8f; // This ends up being around 3 units tall
     private bool jump = false;
 
-    
-
     private void Start()
     {
         int playerLayer = LayerMask.NameToLayer("Player");
