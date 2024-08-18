@@ -32,6 +32,7 @@ public class Platform : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Set up fields
         platformType = getPlatformType();
         targetScale = transform.localScale;
     }
@@ -43,15 +44,27 @@ public class Platform : MonoBehaviour
         if (platformType == PlatformType.Xplatform)
         {
             // Scale platform in x direction
-            transform.localScale = Vector3.Scale(transform.localScale, new Vector3(getScaleX(), 1, 1));
+            targetScale = Vector3.Scale(targetScale, new Vector3(getScaleX(), 1, 1));
 
         }
         else if (platformType == PlatformType.Yplatform)
         {
-            transform.localScale = Vector3.Scale(transform.localScale, new Vector3(1, getScaleY(), 1));
+            targetScale = Vector3.Scale(targetScale, new Vector3(1, getScaleY(), 1));
         }
+    }
 
-        // Increment to targetScale
+    private void FixedUpdate()
+    {
+        // Increment platform towards targetScale
+        transform.localScale = getClampedScale(transform.localScale, targetScale);
+    }
+
+    private Vector3 getClampedScale(Vector3 curr, Vector3 targ)
+    {
+        float x = curr.x + Mathf.Clamp(targ.x - curr.x, -scaleRate, scaleRate);
+        float y = curr.y + Mathf.Clamp(targ.y - curr.y, -scaleRate, scaleRate);
+        float z = curr.z + Mathf.Clamp(targ.z - curr.z, -scaleRate, scaleRate);
+        return new Vector3(x, y, z);
     }
 
     private float getScaleX()
