@@ -42,16 +42,6 @@ public class Player : MonoBehaviour
         {
             jump = true;
         }
-        // bool allowedToJump = canJump();
-        // if (Input.GetButtonDown("Jump") && allowedToJump)
-        // {
-        //     animator.SetBool("IsJumping", true);
-        //     jump = true;
-        //     // rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
-        // }
-        // else if (allowedToJump) {
-        //     animator.SetBool("IsJumping", false);
-        // }
         
     }
 
@@ -65,8 +55,8 @@ public class Player : MonoBehaviour
         else if (allowedToJump) {
             animator.SetBool("IsJumping", false);
         }
+        
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
-        // rb.velocity = new Vector2(horizontal * speed, jump ? jumpingPower : rb.velocity.y);
         jump = false;
     }
 
