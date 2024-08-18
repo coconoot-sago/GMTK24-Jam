@@ -9,6 +9,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    private Transform cameraTransform;
     private LayerMask nonPlayerMask;
     private float horizontal;
     private float speed = 2f;
@@ -22,11 +23,15 @@ public class Player : MonoBehaviour
         int playerLayer = LayerMask.NameToLayer("Player");
         nonPlayerMask = (LayerMask)(~(1 << playerLayer));
 
+        cameraTransform = Camera.main.transform;
+
         rb = GetComponent<Rigidbody2D>();
         tf = GetComponent<Transform>();
     }
     void Update()
     {
+        UpdateCamera();
+
         // Read player controls.
         horizontal = Input.GetAxisRaw("Horizontal");
         if (Input.GetButtonDown("Jump") && canJump())
@@ -41,6 +46,8 @@ public class Player : MonoBehaviour
     {
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
     }
+
+    
 
     private bool canJump()
     {
@@ -57,6 +64,11 @@ public class Player : MonoBehaviour
             localScale.x *= -1f;
             transform.localScale = localScale;
         }
+    }
+
+    private void UpdateCamera()
+    {
+        cameraTransform.position = new Vector3(transform.position.x, transform.position.y, cameraTransform.position.z);
     }
 
 }
