@@ -4,7 +4,7 @@ using UnityEngine;
 /**
  * TODO:
  *  - fix isgrounded to prevent infinite jumps
- * 
+ *  
  */
 
 public class Player : MonoBehaviour
@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
 
     private bool canJump()
     {
-        Vector3 transformWithOffset = new Vector3(tf.position.x, tf.position.y - 0.1f, tf.position.z);
+        Vector3 transformWithOffset = new Vector3(tf.position.x, tf.position.y + 0.4f, tf.position.z);
         return Physics2D.OverlapBox(transformWithOffset, new Vector2(1.0f, 0.8f), 0, nonPlayerMask);
     }
 
