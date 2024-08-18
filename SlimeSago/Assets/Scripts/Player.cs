@@ -12,19 +12,24 @@ public class Player : MonoBehaviour
 {
     private Transform cameraTransform;
     public Animator animator;
-    
+    private Rigidbody2D rb;
+    private Transform tf;
+
     private LayerMask nonPlayerMask;
+    private Vector3 originalPosition;
+
     private float horizontal;
     private float speed = 4f;
     private float jumpingPower = 8f;
     private bool jump = false;
 
-    private Rigidbody2D rb;
-    private Transform tf;
+    
+
     private void Start()
     {
         int playerLayer = LayerMask.NameToLayer("Player");
         nonPlayerMask = (LayerMask)(~(1 << playerLayer));
+        originalPosition = transform.position;
 
         cameraTransform = Camera.main.transform;
 
@@ -128,6 +133,13 @@ public class Player : MonoBehaviour
     private void UpdateCamera()
     {
         cameraTransform.position = new Vector3(transform.position.x, transform.position.y, cameraTransform.position.z);
+    }
+
+    // PUBLIC METHODS --------------------------------------------------------------------------------
+    // Called by evilplatform, etc.
+    public void Reset()
+    {
+        transform.position = originalPosition;
     }
 
 }
