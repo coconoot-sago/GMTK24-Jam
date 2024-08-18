@@ -14,6 +14,8 @@ public class Platform : MonoBehaviour
 
     //private double minScale = 0.5;
     //private double maxScale = 10;
+    private int MAX_SCALE_LEVEL = 1;
+    private int MIN_SCALE_LEVEL = -1;
 
     // scale unit increment to target, per update
     private float scaleRate = 0.4f; 
@@ -23,18 +25,18 @@ public class Platform : MonoBehaviour
     // How much to multiply scale by, for each increment. 
     // [SerializeField]
     private float scaleFactor = 2.0f;
+    private Vector3 originalScale;
     private PlatformType platformType;
 
-
     // STATE ------------------------------------------------------
-    private Vector3 targetScale;
+    private int scaleLevel = 0;
 
     // Start is called before the first frame update
     void Start()
     {
         // Set up fields
         platformType = getPlatformType();
-        targetScale = transform.localScale;
+        originalScale = transform.localScale;
     }
 
     // Update is called once per frame
@@ -43,20 +45,19 @@ public class Platform : MonoBehaviour
         // Update targetScale
         if (platformType == PlatformType.Xplatform)
         {
-            // Scale platform in x direction
-            targetScale = Vector3.Scale(targetScale, new Vector3(getScaleX(), 1, 1));
+            setScaleLevelForXplatform();
 
         }
         else if (platformType == PlatformType.Yplatform)
         {
-            targetScale = Vector3.Scale(targetScale, new Vector3(1, getScaleY(), 1));
+            setScaleLevelForYplatform();
         }
     }
 
     private void FixedUpdate()
     {
         // Increment platform towards targetScale
-        transform.localScale = getClampedScale(transform.localScale, targetScale);
+        transform.localScale = getClampedScale(transform.localScale, getTargetScale());
     }
 
     private Vector3 getClampedScale(Vector3 curr, Vector3 targ)
@@ -67,29 +68,41 @@ public class Platform : MonoBehaviour
         return new Vector3(x, y, z);
     }
 
-    private float getScaleX()
+    private Vector3 getTargetScale()
+    {
+        if (platformType == PlatformType.Xplatform)
+        {
+            return Vector3.Scale(originalScale, new Vector3(Mathf.Pow(scaleFactor, scaleLevel), 1, 1));
+        } else if (platformType == PlatformType.Yplatform) {
+            return Vector3.Scale(originalScale, new Vector3(1, Mathf.Pow(scaleFactor, scaleLevel), 1));
+        } else
+        {
+            return originalScale;
+        }
+    }
+
+    private void setScaleLevelForXplatform()
     {
         if (Input.GetButtonDown("scaleUpX") && !Input.GetButtonDown("scaleDownX"))
         {
-            return scaleFactor;
-        } else if (Input.GetButtonDown("scaleDownX") && !Input.GetButtonDown("scaleUpX"))
-        {
-            return 1/scaleFactor;
+            scaleLevel = (int) Mathf.Clamp(scaleLevel + 1, MIN_SCALE_LEVEL, MAX_SCALE_LEVEL);
         }
-        return 1;
+        else if (Input.GetButtonDown("scaleDownX") && !Input.GetButtonDown("scaleUpX"))
+        {
+            scaleLevel = (int)Mathf.Clamp(scaleLevel - 1, MIN_SCALE_LEVEL, MAX_SCALE_LEVEL);
+        }
     }
 
-    private float getScaleY()
+    private void setScaleLevelForYplatform()
     {
         if (Input.GetButtonDown("scaleUpY") && !Input.GetButtonDown("scaleDownY"))
         {
-            return scaleFactor;
+            scaleLevel = (int)Mathf.Clamp(scaleLevel + 1, MIN_SCALE_LEVEL, MAX_SCALE_LEVEL);
         }
         else if (Input.GetButtonDown("scaleDownY") && !Input.GetButtonDown("scaleUpY"))
         {
-            return 1 / scaleFactor;
+            scaleLevel = (int)Mathf.Clamp(scaleLevel - 1, MIN_SCALE_LEVEL, MAX_SCALE_LEVEL);
         }
-        return 1;
     }
 
     // Whether platform is horizontal or vertical
