@@ -8,8 +8,8 @@ public class Platform : MonoBehaviour
     private enum PlatformType
     {
         Unknown,
-        Horizontal,
-        Vertical
+        Xplatform,
+        Yplatform
     }
 
     //private double minScale = 0.5;
@@ -19,7 +19,7 @@ public class Platform : MonoBehaviour
 
     // How much to multiply scale by, for each increment. 
     // [SerializeField]
-    private float scaleFactor = 1.001f;
+    private float scaleFactor = 2.0f;
     private PlatformType platformType;
     
 
@@ -32,25 +32,41 @@ public class Platform : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float increment = 0.2f; // TODO: update with button input
-        transform.localScale = Vector3.Scale(transform.localScale, getScaleMultiplier(increment));
+        if (platformType == PlatformType.Xplatform)
+        {
+            // Scale platform in x direction
+            transform.localScale = Vector3.Scale(transform.localScale, new Vector3(getScaleX(), 1, 1));
+
+        }
+        else if (platformType == PlatformType.Yplatform)
+        {
+            transform.localScale = Vector3.Scale(transform.localScale, new Vector3(1, getScaleY(), 1));
+        }
     }
 
-    // increment should either +1 or -1
-    // returns new scale to multiply current scale by
-    private Vector3 getScaleMultiplier(float increment)
+    private float getScaleX()
     {
-        float currScaleFactor = increment > 0 ? scaleFactor : 1 / scaleFactor;
-        if (platformType == PlatformType.Horizontal)
+        if (Input.GetButtonDown("scaleUpX") && !Input.GetButtonDown("scaleDownX"))
         {
-            return new Vector3(currScaleFactor, 1,1);
-        } else if (platformType == PlatformType.Vertical)
+            return scaleFactor;
+        } else if (Input.GetButtonDown("scaleDownX") && !Input.GetButtonDown("scaleUpX"))
         {
-            return new Vector3(1, currScaleFactor, 1);
-        } else
-        {
-            return Vector3.one;
+            return 1/scaleFactor;
         }
+        return 1;
+    }
+
+    private float getScaleY()
+    {
+        if (Input.GetButtonDown("scaleUpY") && !Input.GetButtonDown("scaleDownY"))
+        {
+            return scaleFactor;
+        }
+        else if (Input.GetButtonDown("scaleDownY") && !Input.GetButtonDown("scaleUpY"))
+        {
+            return 1 / scaleFactor;
+        }
+        return 1;
     }
 
     // Whether platform is horizontal or vertical
@@ -60,10 +76,10 @@ public class Platform : MonoBehaviour
         string name = spriteRenderer.sprite.name;
         if (name.Contains("horizontal", StringComparison.OrdinalIgnoreCase))
         {
-            return PlatformType.Horizontal;
+            return PlatformType.Xplatform;
         } else if (name.Contains("vertical", StringComparison.OrdinalIgnoreCase))
         {
-            return PlatformType.Vertical;
+            return PlatformType.Yplatform;
         }
         else
         {

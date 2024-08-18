@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 217515992}
   - component: {fileID: 217515991}
   m_Layer: 0
-  m_Name: Vplatform
+  m_Name: Yplatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -306,8 +306,8 @@ GameObject:
   - component: {fileID: 542796000}
   - component: {fileID: 542795999}
   - component: {fileID: 542795998}
-  m_Layer: 0
-  m_Name: Hplatform
+  m_Layer: 6
+  m_Name: Xplatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -476,8 +476,9 @@ GameObject:
   - component: {fileID: 711710485}
   - component: {fileID: 711710484}
   - component: {fileID: 711710487}
+  - component: {fileID: 711710488}
   m_Layer: 0
-  m_Name: temp
+  m_Name: temp_player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -622,6 +623,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
+--- !u!114 &711710488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711710483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38456bd947f232642b23da745980f105, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1903376854
 GameObject:
   m_ObjectHideFlags: 0
