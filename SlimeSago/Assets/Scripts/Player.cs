@@ -9,6 +9,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    private LayerMask nonPlayerMask;
     private float horizontal;
     private float speed = 2f;
     private float jumpingPower = 4f;
@@ -16,27 +17,22 @@ public class Player : MonoBehaviour
 
     private Rigidbody2D rb;
     private Transform tf;
-    private LayerMask groundLayerMask;
     private void Start()
     {
+        int playerLayer = LayerMask.NameToLayer("Player");
+        nonPlayerMask = (LayerMask)(~(1 << playerLayer));
+
         rb = GetComponent<Rigidbody2D>();
         tf = GetComponent<Transform>();
-        groundLayerMask = LayerMask.GetMask("Ground");
     }
     void Update()
     {
         // Read player controls.
         horizontal = Input.GetAxisRaw("Horizontal");
-
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
         }
-
-        //if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
-        //{
-        //    rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
-        //}
 
         Flip();
     }
@@ -48,7 +44,7 @@ public class Player : MonoBehaviour
 
     private bool IsGrounded()
     {
-        return Physics2D.OverlapBox(tf.position, Vector2.one, 0, groundLayerMask);
+        return Physics2D.OverlapBox(tf.position, new Vector2(1.0f, 1.0f), 0, nonPlayerMask);
     }
 
     private void Flip()

@@ -287,8 +287,8 @@ Transform:
   m_GameObject: {fileID: 217515990}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 2, z: 1}
+  m_LocalPosition: {x: 2, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -306,7 +306,7 @@ GameObject:
   - component: {fileID: 542796000}
   - component: {fileID: 542795999}
   - component: {fileID: 542795998}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Xplatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -374,8 +374,8 @@ Transform:
   m_GameObject: {fileID: 542795995}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -0.75, z: 0}
+  m_LocalScale: {x: 8, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -477,7 +477,7 @@ GameObject:
   - component: {fileID: 711710484}
   - component: {fileID: 711710487}
   - component: {fileID: 711710488}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: temp_player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -572,8 +572,8 @@ Transform:
   m_GameObject: {fileID: 711710483}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.729, y: 0.962, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
