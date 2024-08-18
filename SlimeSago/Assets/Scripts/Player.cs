@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     private float horizontal;
     private float speed = 4f;
     private float jumpingPower = 8f;
+    private bool jump = false;
 
     private Rigidbody2D rb;
     private Transform tf;
@@ -37,23 +38,42 @@ public class Player : MonoBehaviour
         horizontal = Input.GetAxisRaw("Horizontal");
         animator.SetFloat("Horizontal", horizontal);
 
-        if (Input.GetButtonDown("Jump") && canJump())
+        if (Input.GetButtonDown("Jump"))
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
-            animator.SetBool("IsJumping", true);
+            jump = true;
         }
+        // bool allowedToJump = canJump();
+        // if (Input.GetButtonDown("Jump") && allowedToJump)
+        // {
+        //     animator.SetBool("IsJumping", true);
+        //     jump = true;
+        //     // rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+        // }
+        // else if (allowedToJump) {
+        //     animator.SetBool("IsJumping", false);
+        // }
+        
     }
 
     private void FixedUpdate()
     {
+        bool allowedToJump = canJump();
+        if (jump && allowedToJump) {
+            animator.SetBool("IsJumping", true);
+            rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+        }
+        else if (allowedToJump) {
+            animator.SetBool("IsJumping", false);
+        }
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        // rb.velocity = new Vector2(horizontal * speed, jump ? jumpingPower : rb.velocity.y);
+        jump = false;
     }
 
     
 
     private bool canJump()
     {   
-        animator.SetBool("IsJumping", false);
         Vector3 transformWithOffset = new Vector3(tf.position.x, tf.position.y + 0.4f, tf.position.z);
         return Physics2D.OverlapBox(transformWithOffset, new Vector2(1.0f, 0.8f), 0, nonPlayerMask);
     }
