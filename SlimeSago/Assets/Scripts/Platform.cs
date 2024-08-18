@@ -16,15 +16,13 @@ public class Platform : MonoBehaviour
     //private double maxScale = 10;
     private int MAX_SCALE_LEVEL = 1;
     private int MIN_SCALE_LEVEL = -1;
+    // How much to multiply scale by, for each increment. 
+    private float SCALE_FACTOR = 2.0f;
 
     // scale unit increment to target, per update
     private float scaleRate = 0.4f; 
 
     // CONSTANTS --------------------------------------------------
-
-    // How much to multiply scale by, for each increment. 
-    // [SerializeField]
-    private float scaleFactor = 2.0f;
     private Vector3 originalScale;
     private PlatformType platformType;
 
@@ -72,9 +70,9 @@ public class Platform : MonoBehaviour
     {
         if (platformType == PlatformType.Xplatform)
         {
-            return Vector3.Scale(originalScale, new Vector3(Mathf.Pow(scaleFactor, scaleLevel), 1, 1));
+            return Vector3.Scale(originalScale, new Vector3(Mathf.Pow(SCALE_FACTOR, scaleLevel), 1, 1));
         } else if (platformType == PlatformType.Yplatform) {
-            return Vector3.Scale(originalScale, new Vector3(1, Mathf.Pow(scaleFactor, scaleLevel), 1));
+            return Vector3.Scale(originalScale, new Vector3(1, Mathf.Pow(SCALE_FACTOR, scaleLevel), 1));
         } else
         {
             return originalScale;
@@ -121,5 +119,18 @@ public class Platform : MonoBehaviour
         {
             return PlatformType.Unknown;
         }
+    }
+
+    // Updates originalScale var, and will naturally rerender to correct scale.
+    // Used by CheckpointPlatform script.
+    public void setOriginalScale(Vector3 newScale)
+    {
+        originalScale = newScale;
+    }
+
+    // Used by CheckpointPlatform script.
+    public Vector3 getOriginalScale()
+    {
+        return originalScale;
     }
 }
