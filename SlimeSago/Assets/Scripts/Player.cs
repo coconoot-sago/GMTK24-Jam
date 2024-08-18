@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
     {
         // Read player controls.
         horizontal = Input.GetAxisRaw("Horizontal");
-        if (Input.GetButtonDown("Jump") && IsGrounded())
+        if (Input.GetButtonDown("Jump") && canJump())
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
         }
@@ -42,9 +42,10 @@ public class Player : MonoBehaviour
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
     }
 
-    private bool IsGrounded()
+    private bool canJump()
     {
-        return Physics2D.OverlapBox(tf.position, new Vector2(1.0f, 1.0f), 0, nonPlayerMask);
+        Vector3 transformWithOffset = new Vector3(tf.position.x, tf.position.y - 0.1f, tf.position.z);
+        return Physics2D.OverlapBox(transformWithOffset, new Vector2(1.0f, 0.8f), 0, nonPlayerMask);
     }
 
     private void Flip()
