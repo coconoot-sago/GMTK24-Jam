@@ -9,7 +9,7 @@ public class CheckpointPlatform : MonoBehaviour
     private Transform playerTransform;
     private Platform platformScript;
 
-    private int HEIGHT_INCREMENT = 10; // checkpoint every n units
+    private int HEIGHT_INCREMENT = 20; // checkpoint every n units
 
     // STATE -----------------------------------------------------
     private int checkpoint = 0;

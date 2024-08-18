@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
 
     private float horizontal;
     private float speed = 4f;
-    private float jumpingPower = 8f;
+    private float jumpingPower = 8f; // This ends up being around 3 units tall
     private bool jump = false;
 
     
