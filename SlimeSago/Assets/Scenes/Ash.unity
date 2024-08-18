@@ -486,14 +486,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Yplatform
       objectReference: {fileID: 0}
-    - target: {fileID: 8336765130453536562, guid: 1991a3ad8f503554495d46df1c212e52, type: 3}
-      propertyPath: m_Size.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8336765130453536562, guid: 1991a3ad8f503554495d46df1c212e52, type: 3}
-      propertyPath: m_Size.y
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -510,14 +502,6 @@ PrefabInstance:
     - target: {fileID: 320913350874149149, guid: fe125d4d41d179248b502769e1ff8324, type: 3}
       propertyPath: m_Name
       value: Xplatform
-      objectReference: {fileID: 0}
-    - target: {fileID: 2111217072611524854, guid: fe125d4d41d179248b502769e1ff8324, type: 3}
-      propertyPath: m_Size.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2111217072611524854, guid: fe125d4d41d179248b502769e1ff8324, type: 3}
-      propertyPath: m_Size.y
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4631578846375719274, guid: fe125d4d41d179248b502769e1ff8324, type: 3}
       propertyPath: m_LocalScale.x
