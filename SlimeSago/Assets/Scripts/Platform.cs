@@ -27,17 +27,19 @@ public class Platform : MonoBehaviour
 
 
     // STATE ------------------------------------------------------
-    private Vector3 target
+    private Vector3 targetScale;
 
     // Start is called before the first frame update
     void Start()
     {
         platformType = getPlatformType();
+        targetScale = transform.localScale;
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Update targetScale
         if (platformType == PlatformType.Xplatform)
         {
             // Scale platform in x direction
@@ -48,6 +50,8 @@ public class Platform : MonoBehaviour
         {
             transform.localScale = Vector3.Scale(transform.localScale, new Vector3(1, getScaleY(), 1));
         }
+
+        // Increment to targetScale
     }
 
     private float getScaleX()
