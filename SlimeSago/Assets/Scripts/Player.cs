@@ -48,6 +48,12 @@ public class Player : MonoBehaviour
         {
             jump = true;
         }
+
+        // For debug purposees
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Reset();
+        }
         
     }
 
