@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/AshLevel.unity
     guid: e384fb41459348f44a0e421c39e4b67e
+  - enabled: 1
+    path: Assets/Scenes/TitleScreen.unity
+    guid: a03a6aa491c764d5aa646203c4951fb0
   m_configObjects: {}
