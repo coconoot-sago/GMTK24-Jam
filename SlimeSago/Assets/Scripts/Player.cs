@@ -49,7 +49,7 @@ public class Player : MonoBehaviour
         }
 
         // For debug purposees
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) || transform.position.y < -20)
         {
             Reset();
         }
