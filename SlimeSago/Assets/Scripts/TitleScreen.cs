@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 public class TitleScreen : MonoBehaviour
 {
     private bool loaded = false;
-    private float timer = 3.0f;
+    private const float loadTime = 1.0f;
+    private float timer = 2.0f;
     private const string levelOne = "AshLevel";
     public Material mat;
 
@@ -19,27 +20,29 @@ public class TitleScreen : MonoBehaviour
     {
         if (!loaded)
         {
-            updateTransparency(mat.color.a * 1.01f);
+            updateTransparency(mat.color.a + (Time.deltaTime / loadTime));
         }
-        else
+        else if (timer > 0)
         {
-            if (timer > 0)
-            {
-                timer -= Time.deltaTime;
-                if (timer < 1 && mat.color.a > 0)
-                {
-                    updateTransparency(mat.color.a * 0.995f);
-                }
-            }
-            else {
-                updateTransparency(0);
-            SceneManager.LoadScene(levelOne);
-            }
+            timer -= Time.deltaTime;
         }
 
         if (mat.color.a >= 0.99f)
         {
+            if (!loaded)
+            {
+                updateTransparency(1);
+            }
             loaded = true;
+        }
+        else if (loaded && mat.color.a < 0.01f)
+        {
+            updateTransparency(0);
+            SceneManager.LoadScene(levelOne);
+        }
+        if (loaded && timer <= 0)
+        {
+            updateTransparency(mat.color.a - (Time.deltaTime / loadTime));
         }
     }
 
