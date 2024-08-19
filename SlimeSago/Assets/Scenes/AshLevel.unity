@@ -5941,6 +5941,18 @@ PrefabInstance:
       value: 8.4375
       objectReference: {fileID: 0}
     - target: {fileID: 8465385706648747509, guid: 05ddecdc22db54678a64d79dd5a9bbe5, type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8465385706648747509, guid: 05ddecdc22db54678a64d79dd5a9bbe5, type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0.67858595
+      objectReference: {fileID: 0}
+    - target: {fileID: 8465385706648747509, guid: 05ddecdc22db54678a64d79dd5a9bbe5, type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0.6698113
+      objectReference: {fileID: 0}
+    - target: {fileID: 8465385706648747509, guid: 05ddecdc22db54678a64d79dd5a9bbe5, type: 3}
       propertyPath: m_NormalizedViewPortRect.x
       value: 0
       objectReference: {fileID: 0}
@@ -6048,7 +6060,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5646829815169016200, guid: 6c3523e72bb4e7a458f097d2621653f7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 32
+      value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 5646829815169016200, guid: 6c3523e72bb4e7a458f097d2621653f7, type: 3}
       propertyPath: m_LocalPosition.z
