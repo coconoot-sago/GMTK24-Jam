@@ -61,7 +61,7 @@ public class Player : MonoBehaviour
         bool isJumping = animator.GetBool("IsJumping");
 
         // if wall-jumping or free-falling, and no horizontal inputs from the player, deccelerate horizontally
-        if ((horizontal == 0 || wallJump != 0) && isJumping)
+        if ((horizontal == 0 || (wallJump != 0 && rb.velocity.x * horizontal < 0)) && isJumping)
         {
             rb.velocity = new Vector2(Math.Abs(rb.velocity.x) < 0.1 ? 0 : 0.9f * rb.velocity.x, rb.velocity.y);
         }
