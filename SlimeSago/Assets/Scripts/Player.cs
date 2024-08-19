@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     private float speed = 4f;
     private float jumpingPower = 8f; // This ends up being around 3 units tall
     private bool jump = false;
+    private int wallJump = 0;
 
     private void Start()
     {
@@ -59,12 +60,12 @@ public class Player : MonoBehaviour
     {
         bool isJumping = animator.GetBool("IsJumping");
 
-        // if free-falling and no horizontal inputs from the player, deccelerate horizontally
-        if (horizontal == 0 && isJumping)
+        // if wall-jumping or free-falling, and no horizontal inputs from the player, deccelerate horizontally
+        if ((horizontal == 0 || wallJump != 0) && isJumping)
         {
-            rb.velocity = new Vector2(0.9f * rb.velocity.x, rb.velocity.y);
+            rb.velocity = new Vector2(Math.Abs(rb.velocity.x) < 0.1 ? 0 : 0.9f * rb.velocity.x, rb.velocity.y);
         }
-        // if free-falling and has horizontal inputs from the player, gradually change velocity
+        // if free-falling and has horizontal inputs from the player, gradually change velocity to direction player inputted
         else if (isJumping)
         {
             float velocityX = rb.velocity.x + 0.5f * horizontal;
@@ -94,10 +95,12 @@ public class Player : MonoBehaviour
             else if (leftWallJump)
             {
                 rb.velocity = new Vector2(jumpingPower, jumpingPower);
+                wallJump = -1;
             }
             else if (rightWallJump)
             {
                 rb.velocity = new Vector2(-jumpingPower, jumpingPower);
+                wallJump = 1;
             }
         }
         else if (allowedToJump)
@@ -113,6 +116,10 @@ public class Player : MonoBehaviour
         if (rb.velocity.y < -1.0f)
         {
             animator.SetBool("IsJumping", true);
+        }
+
+        if (wallJump != 0 && wallJump * rb.velocity.x >= 0) {
+            wallJump = 0;
         }
     }
 
